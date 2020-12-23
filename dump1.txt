@@ -1,0 +1,255 @@
+
+hello1.ko.unstripped:     file format elf32-littlearm
+
+
+Disassembly of section .text:
+
+00000000 <print_hello>:
+
+static uint count_hw = 1;
+module_param(count_hw, uint, 0444);//S_IRUGO
+MODULE_PARM_DESC(count_hw, "This parameter is responsible for number of hello world printed");
+int print_hello(uint count_hw)
+{
+   0:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+uint i;
+struct shvachko_list_head *tmp1;
+struct shvachko_list_head *variable, *tmp;
+
+if (count_hw == 0)
+   4:	e2508000 	subs	r8, r0, #0
+   8:	0a000044 	beq	120 <print_hello+0x120>
+	pr_warn("You cannot enter 0");
+if (count_hw >= 5 && count_hw <= 10)
+   c:	e2483005 	sub	r3, r8, #5
+  10:	e3530005 	cmp	r3, #5
+  14:	9a00003d 	bls	110 <print_hello+0x110>
+	pr_warn("You should enter number below 5");
+
+BUG_ON(count_hw > 10);
+  18:	e358000a 	cmp	r8, #10
+  1c:	8a000035 	bhi	f8 <print_hello+0xf8>
+  20:	e3007000 	movw	r7, #0
+  24:	e3006000 	movw	r6, #0
+			unsigned int index = kmalloc_index(size);
+
+			if (!index)
+				return ZERO_SIZE_PTR;
+
+			return kmem_cache_alloc_trace(kmalloc_caches[index],
+  28:	e3a0a0c0 	mov	sl, #192	; 0xc0
+if (ZERO_OR_NULL_PTR(tmp1))
+	goto show_error;
+}
+list_add_tail(&(tmp1->list_node), &header);
+tmp1->time = ktime_get();
+pr_info("Hello World!");
+  2c:	e3009000 	movw	r9, #0
+  30:	e3407000 	movt	r7, #0
+  34:	e3406000 	movt	r6, #0
+  38:	e340a060 	movt	sl, #96	; 0x60
+  3c:	e3409000 	movt	r9, #0
+{
+  40:	e3a05000 	mov	r5, #0
+  44:	ea00000d 	b	80 <print_hello+0x80>
+ * Insert a new entry before the specified head.
+ * This is useful for implementing queues.
+ */
+static inline void list_add_tail(struct list_head *new, struct list_head *head)
+{
+	__list_add(new, head->prev, head);
+  48:	e5963004 	ldr	r3, [r6, #4]
+for (i = 0; i < count_hw; i++) {
+  4c:	e2855001 	add	r5, r5, #1
+	new->next = next;
+  50:	e5806000 	str	r6, [r0]
+	next->prev = new;
+  54:	e5860004 	str	r0, [r6, #4]
+	new->prev = prev;
+  58:	e5803004 	str	r3, [r0, #4]
+static __always_inline void __write_once_size(volatile void *p, void *res, int size)
+{
+	switch (size) {
+	case 1: *(volatile __u8 *)p = *(__u8 *)res; break;
+	case 2: *(volatile __u16 *)p = *(__u16 *)res; break;
+	case 4: *(volatile __u32 *)p = *(__u32 *)res; break;
+  5c:	e5830000 	str	r0, [r3]
+tmp1->time = ktime_get();
+  60:	ebfffffe 	bl	0 <ktime_get>
+  64:	e1c400f8 	strd	r0, [r4, #8]
+pr_info("Hello World!");
+  68:	e1a00009 	mov	r0, r9
+  6c:	ebfffffe 	bl	0 <printk>
+tmp1->time1 = ktime_get();
+  70:	ebfffffe 	bl	0 <ktime_get>
+for (i = 0; i < count_hw; i++) {
+  74:	e1580005 	cmp	r8, r5
+tmp1->time1 = ktime_get();
+  78:	e1c401f0 	strd	r0, [r4, #16]
+for (i = 0; i < count_hw; i++) {
+  7c:	9a00002a 	bls	12c <print_hello+0x12c>
+  80:	e3a02008 	mov	r2, #8
+  84:	e1a0100a 	mov	r1, sl
+  88:	e5970018 	ldr	r0, [r7, #24]
+  8c:	ebfffffe 	bl	0 <kmem_cache_alloc_trace>
+if (i == 5) {
+  90:	e3550005 	cmp	r5, #5
+  94:	e1a04000 	mov	r4, r0
+  98:	1affffea 	bne	48 <print_hello+0x48>
+//При нестачі пам'яті для
+//чергового елементу списку,
+//не можна відразу
+//виходити з кодом помилки...
+
+	list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  9c:	e5963000 	ldr	r3, [r6]
+  a0:	e1530006 	cmp	r3, r6
+  a4:	e5934000 	ldr	r4, [r3]
+}
+
+static inline void list_del(struct list_head *entry)
+{
+	__list_del_entry(entry);
+	entry->next = LIST_POISON1;
+  a8:	13a08c01 	movne	r8, #256	; 0x100
+	entry->prev = LIST_POISON2;
+  ac:	13a07c02 	movne	r7, #512	; 0x200
+  b0:	11a05004 	movne	r5, r4
+  b4:	0a00000b 	beq	e8 <print_hello+0xe8>
+	__list_del(entry->prev, entry->next);
+  b8:	e5932004 	ldr	r2, [r3, #4]
+		list_del(&variable->list_node);
+		kfree(variable);
+  bc:	e1a00003 	mov	r0, r3
+	next->prev = prev;
+  c0:	e5842004 	str	r2, [r4, #4]
+  c4:	e5824000 	str	r4, [r2]
+	entry->next = LIST_POISON1;
+  c8:	e5838000 	str	r8, [r3]
+	entry->prev = LIST_POISON2;
+  cc:	e5837004 	str	r7, [r3, #4]
+  d0:	ebfffffe 	bl	0 <kfree>
+	list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  d4:	e5944000 	ldr	r4, [r4]
+  d8:	e1550006 	cmp	r5, r6
+  dc:	e1a03005 	mov	r3, r5
+  e0:	e1a05004 	mov	r5, r4
+  e4:	1afffff3 	bne	b8 <print_hello+0xb8>
+	__READ_ONCE_SIZE;
+  e8:	e5963000 	ldr	r3, [r6]
+	}
+	BUG_ON(!list_empty(&header));
+  ec:	e1560003 	cmp	r6, r3
+  f0:	0a000001 	beq	fc <print_hello+0xfc>
+  f4:	e7f001f2 	.word	0xe7f001f2
+BUG_ON(count_hw > 10);
+  f8:	e7f001f2 	.word	0xe7f001f2
+	pr_warn("Zero or null pointer on");
+  fc:	e3000000 	movw	r0, #0
+ 100:	e3400000 	movt	r0, #0
+ 104:	ebfffffe 	bl	0 <printk>
+	return -ENOMEM; /*out of memory(12)*/
+ 108:	e3e0000b 	mvn	r0, #11
+}
+ 10c:	e8bd87f0 	pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+	pr_warn("You should enter number below 5");
+ 110:	e3000000 	movw	r0, #0
+ 114:	e3400000 	movt	r0, #0
+ 118:	ebfffffe 	bl	0 <printk>
+BUG_ON(count_hw > 10);
+ 11c:	eaffffbf 	b	20 <print_hello+0x20>
+	pr_warn("You cannot enter 0");
+ 120:	e3000000 	movw	r0, #0
+ 124:	e3400000 	movt	r0, #0
+ 128:	ebfffffe 	bl	0 <printk>
+pr_info("count: %d\n", count_hw);
+ 12c:	e1a01008 	mov	r1, r8
+ 130:	e3000000 	movw	r0, #0
+ 134:	e3400000 	movt	r0, #0
+ 138:	ebfffffe 	bl	0 <printk>
+return 0;
+ 13c:	e3a00000 	mov	r0, #0
+ 140:	e8bd87f0 	pop	{r4, r5, r6, r7, r8, r9, sl, pc}
+
+Disassembly of section .init.text:
+
+00000000 <init_module>:
+EXPORT_SYMBOL(print_hello);
+
+static int __init initter(void)
+{
+return 0;
+}
+   0:	e3a00000 	mov	r0, #0
+   4:	e12fff1e 	bx	lr
+
+Disassembly of section .exit.text:
+
+00000000 <cleanup_module>:
+static void __exit exitter(void)
+{
+struct shvachko_list_head *variable, *tmp;
+list_for_each_entry_safe(variable, tmp, &header, list_node) {
+   0:	e3003000 	movw	r3, #0
+   4:	e3403000 	movt	r3, #0
+{
+   8:	e92d47f0 	push	{r4, r5, r6, r7, r8, r9, sl, lr}
+	pr_info("Time : %lld", variable->time);
+   c:	e3008000 	movw	r8, #0
+list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  10:	e5934000 	ldr	r4, [r3]
+	pr_info("Deltha time: %lld", variable->time1-variable->time);
+  14:	e3007000 	movw	r7, #0
+	pr_info("Time : %lld", variable->time);
+  18:	e3408000 	movt	r8, #0
+	pr_info("Deltha time: %lld", variable->time1-variable->time);
+  1c:	e3407000 	movt	r7, #0
+  20:	e1a05003 	mov	r5, r3
+	entry->next = LIST_POISON1;
+  24:	e3a09c01 	mov	r9, #256	; 0x100
+list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  28:	e5946000 	ldr	r6, [r4]
+  2c:	e1540005 	cmp	r4, r5
+  30:	0a000015 	beq	8c <cleanup_module+0x8c>
+	pr_info("Time : %lld", variable->time);
+  34:	e1c420d8 	ldrd	r2, [r4, #8]
+  38:	e1a00008 	mov	r0, r8
+  3c:	ebfffffe 	bl	0 <printk>
+	pr_info("Deltha time: %lld", variable->time1-variable->time);
+  40:	e5941010 	ldr	r1, [r4, #16]
+  44:	e5942008 	ldr	r2, [r4, #8]
+  48:	e1a00007 	mov	r0, r7
+  4c:	e594c014 	ldr	ip, [r4, #20]
+  50:	e594300c 	ldr	r3, [r4, #12]
+  54:	e0512002 	subs	r2, r1, r2
+  58:	e0cc3003 	sbc	r3, ip, r3
+  5c:	ebfffffe 	bl	0 <printk>
+	__list_del(entry->prev, entry->next);
+  60:	e1c420d0 	ldrd	r2, [r4]
+	entry->prev = LIST_POISON2;
+  64:	e3a01c02 	mov	r1, #512	; 0x200
+	list_del(&variable->list_node);
+	kfree(variable);
+  68:	e1a00004 	mov	r0, r4
+	next->prev = prev;
+  6c:	e5823004 	str	r3, [r2, #4]
+	case 4: *(volatile __u32 *)p = *(__u32 *)res; break;
+  70:	e5832000 	str	r2, [r3]
+	entry->next = LIST_POISON1;
+  74:	e5849000 	str	r9, [r4]
+	entry->prev = LIST_POISON2;
+  78:	e5841004 	str	r1, [r4, #4]
+list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  7c:	e1a04006 	mov	r4, r6
+	kfree(variable);
+  80:	ebfffffe 	bl	0 <kfree>
+list_for_each_entry_safe(variable, tmp, &header, list_node) {
+  84:	e5966000 	ldr	r6, [r6]
+  88:	eaffffe7 	b	2c <cleanup_module+0x2c>
+	__READ_ONCE_SIZE;
+  8c:	e5943000 	ldr	r3, [r4]
+}
+BUG_ON(!list_empty(&header));
+  90:	e1540003 	cmp	r4, r3
+  94:	08bd87f0 	popeq	{r4, r5, r6, r7, r8, r9, sl, pc}
+  98:	e7f001f2 	.word	0xe7f001f2
